@@ -8,6 +8,24 @@ before_install:
 script:
     - docker run -e CI=true arnizzle/react-workflow npm run test
 
-    
+deploy:
+    provider: elasticbeanstalk
+    region: "eu-west-2"
+    app: "react-workflow"
+    env: "ReactWorkflow-env"
+    bucket_name: "arn:aws:s3:::elasticbeanstalk-eu-west-2-844569641877"
+    bucket_path: "react-workflow"
+    on:
+        branch: master
+    access_key_id: "$AWS_ACCESS_KEY"
+    secret_access_key: 
+        secure: "$AWS_SECRET_KEY"
+
+# deploy:
+#     edge: true
+#     provider: elasticbeanstalk
+
+# access_key_id: $AWS_ACCESS_KEY
+# secret_access_key: $AWS_SECRET_KEY
 
 
